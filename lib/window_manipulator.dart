@@ -317,11 +317,11 @@ class WindowManipulator {
 
   /// Sets the window background color to the specified color.
   /// /// The color is specified as a hex string, e.g. `#FF0000` for red.
-  static Future<void> setWindowBackgroundColor(String color) async {
+  static Future<void> setWindowBackgroundColor(Color color) async {
     await _completer.future;
     await _windowManipulatorMethodChannel.invokeMethod(
       'setWindowBackgroundColor',
-      <String, dynamic>{'color': color},
+      <String, dynamic>{'r': color.r, 'g': color.g, 'b': color.b, 'a': color.a},
     );
   }
 
@@ -653,11 +653,9 @@ class WindowManipulator {
   /// window's presentation to its default state.
   static Future<void> removeFullScreenPresentationOptions() async {
     await _completer.future;
-    final hasSucceeded =
-        await _windowManipulatorMethodChannel.invokeMethod(
-              'removeFullScreenPresentationOptions',
-            )
-            as bool;
+    final hasSucceeded = await _windowManipulatorMethodChannel.invokeMethod(
+      'removeFullScreenPresentationOptions',
+    ) as bool;
 
     assert(
       hasSucceeded,
@@ -712,12 +710,10 @@ class WindowManipulator {
     NSAppPresentationOption option,
   ) async {
     await _completer.future;
-    final hasSucceeded =
-        await _windowManipulatorMethodChannel.invokeMethod(
-              'addFullScreenPresentationOption',
-              {'presentationOption': option.name},
-            )
-            as bool;
+    final hasSucceeded = await _windowManipulatorMethodChannel.invokeMethod(
+      'addFullScreenPresentationOption',
+      {'presentationOption': option.name},
+    ) as bool;
 
     assert(
       hasSucceeded,
@@ -907,13 +903,13 @@ class WindowManipulator {
     await _completer.future;
     await _windowManipulatorMethodChannel
         .invokeMethod('updateToolbarPassthroughView', {
-          'id': id,
-          'x': x,
-          'y': y,
-          'width': width,
-          'height': height,
-          'enableDebugLayers': enableDebugLayers,
-        });
+      'id': id,
+      'x': x,
+      'y': y,
+      'width': width,
+      'height': height,
+      'enableDebugLayers': enableDebugLayers,
+    });
   }
 
   /// Removes the toolbar passthrough view with the specified [id].

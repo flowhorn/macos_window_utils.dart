@@ -237,8 +237,13 @@ public class MacOSWindowUtilsPlugin: NSObject, FlutterPlugin {
             break
 
           case "setWindowBackgroundColor":
-            let color = args["color"] as! String
-            MainFlutterWindowManipulator.setWindowBackgroundColor(color: NSColor(named: color) ?? .clear)
+            // Using r,g,b,a values
+            let r = args["r"] as! CGFloat
+            let g = args["g"] as! CGFloat
+            let b = args["b"] as! CGFloat
+            let a = args["a"] as! CGFloat
+            let color = NSColor(red: r, green: g, blue: b, alpha: a)
+            MainFlutterWindowManipulator.setWindowBackgroundColor(color: color)
             result(true)
             break
             
