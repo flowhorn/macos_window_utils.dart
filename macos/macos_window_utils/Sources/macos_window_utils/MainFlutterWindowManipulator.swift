@@ -328,6 +328,14 @@ public class MainFlutterWindowManipulator {
         
         return self.mainFlutterWindow!.isVisible
     }
+
+     public static func setWindowBackgroundColor(color: NSColor) {
+        if (self.mainFlutterWindow == nil) {
+            start(mainFlutterWindow: nil)
+        }
+
+        self.mainFlutterWindow!.backgroundColor = color
+    }
     
     public static func setWindowBackgroundColorToDefaultColor() {
         if (self.mainFlutterWindow == nil) {

@@ -235,6 +235,12 @@ public class MacOSWindowUtilsPlugin: NSObject, FlutterPlugin {
             let isWindowVisible = MainFlutterWindowManipulator.isWindowVisible()
             result(isWindowVisible)
             break
+
+          case "setWindowBackgroundColor":
+            let color = args["color"] as! String
+            MainFlutterWindowManipulator.setWindowBackgroundColor(color: NSColor(named: color) ?? .clear)
+            result(true)
+            break
             
         case "setWindowBackgroundColorToDefaultColor":
             MainFlutterWindowManipulator.setWindowBackgroundColorToDefaultColor()

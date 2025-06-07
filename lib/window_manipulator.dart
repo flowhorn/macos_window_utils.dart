@@ -16,8 +16,9 @@ import 'toolbars/toolbars.dart';
 
 /// Class that provides methods to manipulate the application's window.
 class WindowManipulator {
-  static final _windowManipulatorMethodChannel =
-      const MethodChannel('macos_window_utils/window_manipulator');
+  static final _windowManipulatorMethodChannel = const MethodChannel(
+    'macos_window_utils/window_manipulator',
+  );
   static final _completer = Completer<void>();
   static final _nsWindowDelegateHandler = NSWindowDelegateHandler();
 
@@ -63,10 +64,9 @@ class WindowManipulator {
   /// ```
   static Future<void> setMaterial(NSVisualEffectViewMaterial material) async {
     await _completer.future;
-    await _windowManipulatorMethodChannel.invokeMethod(
-      'setMaterial',
-      {'material': material.index},
-    );
+    await _windowManipulatorMethodChannel.invokeMethod('setMaterial', {
+      'material': material.index,
+    });
   }
 
   /// Makes the Flutter window fullscreen.
@@ -87,8 +87,9 @@ class WindowManipulator {
   /// be 0.
   static Future<double> getTitlebarHeight() async {
     await _completer.future;
-    return await _windowManipulatorMethodChannel
-        .invokeMethod('getTitlebarHeight');
+    return await _windowManipulatorMethodChannel.invokeMethod(
+      'getTitlebarHeight',
+    );
   }
 
   /// Sets the document to be edited.
@@ -138,8 +139,9 @@ class WindowManipulator {
   /// Makes the window's titlebar transparent.
   static Future<void> makeTitlebarTransparent() async {
     await _completer.future;
-    await _windowManipulatorMethodChannel
-        .invokeMethod('makeTitlebarTransparent');
+    await _windowManipulatorMethodChannel.invokeMethod(
+      'makeTitlebarTransparent',
+    );
   }
 
   /// Makes the window's titlebar opaque.
@@ -155,15 +157,17 @@ class WindowManipulator {
   /// the titlebar transparent.
   static Future<void> enableFullSizeContentView() async {
     await _completer.future;
-    await _windowManipulatorMethodChannel
-        .invokeMethod('enableFullSizeContentView');
+    await _windowManipulatorMethodChannel.invokeMethod(
+      'enableFullSizeContentView',
+    );
   }
 
   /// Disables the window's full-size content view.
   static Future<void> disableFullSizeContentView() async {
     await _completer.future;
-    await _windowManipulatorMethodChannel
-        .invokeMethod('disableFullSizeContentView');
+    await _windowManipulatorMethodChannel.invokeMethod(
+      'disableFullSizeContentView',
+    );
   }
 
   /// Zooms the window.
@@ -187,8 +191,9 @@ class WindowManipulator {
   /// Returns if the window is fullscreened.
   static Future<bool> isWindowFullscreened() async {
     await _completer.future;
-    return await _windowManipulatorMethodChannel
-        .invokeMethod('isWindowFullscreened');
+    return await _windowManipulatorMethodChannel.invokeMethod(
+      'isWindowFullscreened',
+    );
   }
 
   /// Hides the window's zoom button.
@@ -258,15 +263,17 @@ class WindowManipulator {
   /// The miniaturize button is enabled by default.
   static Future<void> enableMiniaturizeButton() async {
     await _completer.future;
-    await _windowManipulatorMethodChannel
-        .invokeMethod('enableMiniaturizeButton');
+    await _windowManipulatorMethodChannel.invokeMethod(
+      'enableMiniaturizeButton',
+    );
   }
 
   /// Disables the window's miniaturize button.
   static Future<void> disableMiniaturizeButton() async {
     await _completer.future;
-    await _windowManipulatorMethodChannel
-        .invokeMethod('disableMiniaturizeButton');
+    await _windowManipulatorMethodChannel.invokeMethod(
+      'disableMiniaturizeButton',
+    );
   }
 
   /// Enables the window's close button.
@@ -286,24 +293,36 @@ class WindowManipulator {
   /// Gets whether the window is currently being resized by the user.
   static Future<bool> isWindowInLiveResize() async {
     await _completer.future;
-    return await _windowManipulatorMethodChannel
-        .invokeMethod('isWindowInLiveResize');
+    return await _windowManipulatorMethodChannel.invokeMethod(
+      'isWindowInLiveResize',
+    );
   }
 
   /// Sets the window's alpha value.
   static Future<void> setWindowAlphaValue(double value) async {
     await _completer.future;
-    await _windowManipulatorMethodChannel
-        .invokeMethod('setWindowAlphaValue', <String, dynamic>{
-      'value': value,
-    });
+    await _windowManipulatorMethodChannel.invokeMethod(
+      'setWindowAlphaValue',
+      <String, dynamic>{'value': value},
+    );
   }
 
   /// Gets if the window is visible.
   static Future<bool> isWindowVisible() async {
     await _completer.future;
-    return await _windowManipulatorMethodChannel
-        .invokeMethod('isWindowVisible');
+    return await _windowManipulatorMethodChannel.invokeMethod(
+      'isWindowVisible',
+    );
+  }
+
+  /// Sets the window background color to the specified color.
+  /// /// The color is specified as a hex string, e.g. `#FF0000` for red.
+  static Future<void> setWindowBackgroundColor(String color) async {
+    await _completer.future;
+    await _windowManipulatorMethodChannel.invokeMethod(
+      'setWindowBackgroundColor',
+      <String, dynamic>{'color': color},
+    );
   }
 
   /// Sets the window background color to the default (opaque) window color.
@@ -311,68 +330,74 @@ class WindowManipulator {
   /// This method mainly affects the window's titlebar.
   static Future<void> setWindowBackgroundColorToDefaultColor() async {
     await _completer.future;
-    await _windowManipulatorMethodChannel
-        .invokeMethod('setWindowBackgroundColorToDefaultColor');
+    await _windowManipulatorMethodChannel.invokeMethod(
+      'setWindowBackgroundColorToDefaultColor',
+    );
   }
 
   /// Sets the window background color to clear.
   static Future<void> setWindowBackgroundColorToClear() async {
     await _completer.future;
-    await _windowManipulatorMethodChannel
-        .invokeMethod('setWindowBackgroundColorToClear');
+    await _windowManipulatorMethodChannel.invokeMethod(
+      'setWindowBackgroundColorToClear',
+    );
   }
 
   /// Sets the `NSVisualEffectView` state.
   static Future<void> setNSVisualEffectViewState(
-      NSVisualEffectViewState state) async {
+    NSVisualEffectViewState state,
+  ) async {
     await _completer.future;
-    await _windowManipulatorMethodChannel
-        .invokeMethod('setNSVisualEffectViewState', <String, dynamic>{
-      'state': state.name,
-    });
+    await _windowManipulatorMethodChannel.invokeMethod(
+      'setNSVisualEffectViewState',
+      <String, dynamic>{'state': state.name},
+    );
   }
 
   /// Adds a visual effect subview to the application's window and returns its
   /// ID.
   static Future<int> addVisualEffectSubview(
-      VisualEffectSubviewProperties properties) async {
+    VisualEffectSubviewProperties properties,
+  ) async {
     await _completer.future;
     return await _windowManipulatorMethodChannel.invokeMethod(
-        'addVisualEffectSubview', properties.toMap());
+      'addVisualEffectSubview',
+      properties.toMap(),
+    );
   }
 
   /// Updates the properties of a visual effect subview.
   static Future<void> updateVisualEffectSubviewProperties(
-      int visualEffectSubviewId,
-      VisualEffectSubviewProperties properties) async {
+    int visualEffectSubviewId,
+    VisualEffectSubviewProperties properties,
+  ) async {
     await _completer.future;
-    await _windowManipulatorMethodChannel
-        .invokeMethod('updateVisualEffectSubviewProperties', <String, dynamic>{
-      'visualEffectSubviewId': visualEffectSubviewId,
-      ...properties.toMap(),
-    });
+    await _windowManipulatorMethodChannel.invokeMethod(
+      'updateVisualEffectSubviewProperties',
+      <String, dynamic>{
+        'visualEffectSubviewId': visualEffectSubviewId,
+        ...properties.toMap(),
+      },
+    );
   }
 
   /// Removes a visual effect subview from the application's window.
   static Future<void> removeVisualEffectSubview(
-      int visualEffectSubviewId) async {
+    int visualEffectSubviewId,
+  ) async {
     await _completer.future;
-    await _windowManipulatorMethodChannel
-        .invokeMethod('removeVisualEffectSubview', <String, dynamic>{
-      'visualEffectSubviewId': visualEffectSubviewId,
-    });
+    await _windowManipulatorMethodChannel.invokeMethod(
+      'removeVisualEffectSubview',
+      <String, dynamic>{'visualEffectSubviewId': visualEffectSubviewId},
+    );
   }
 
   /// Overrides the brightness setting of the window.
-  static Future<void> overrideMacOSBrightness({
-    required bool dark,
-  }) async {
+  static Future<void> overrideMacOSBrightness({required bool dark}) async {
     await _completer.future;
     await _windowManipulatorMethodChannel.invokeMethod(
       'overrideMacOSBrightness',
-      {
-        'dark': dark,
-      },
+      {'dark': dark},
     );
   }
 
@@ -400,16 +425,14 @@ class WindowManipulator {
   /// You may wish to hide the native title to extend the blocking area:
   ///
   /// ![image](https://github.com/user-attachments/assets/62e16d4a-1e4d-4c4d-9f1b-f731d08e0b1c)
-  static Future<void> addToolbar(
-      {Toolbar toolbar = const DefaultToolbar()}) async {
+  static Future<void> addToolbar({
+    Toolbar toolbar = const DefaultToolbar(),
+  }) async {
     await _completer.future;
-    await _windowManipulatorMethodChannel.invokeMethod(
-      'addToolbar',
-      {
-        'toolbarName': toolbar.getName(),
-        'toolbarArguments': toolbar.getArguments(),
-      },
-    );
+    await _windowManipulatorMethodChannel.invokeMethod('addToolbar', {
+      'toolbarName': toolbar.getName(),
+      'toolbarArguments': toolbar.getArguments(),
+    });
   }
 
   /// Removes the window's toolbar.
@@ -428,8 +451,9 @@ class WindowManipulator {
   /// WindowManipulator.addToolbar();
   /// WindowManipulator.setToolbarStyle(NSWindowToolbarStyle.unified);
   /// ```
-  static Future<void> setToolbarStyle(
-      {required NSWindowToolbarStyle toolbarStyle}) async {
+  static Future<void> setToolbarStyle({
+    required NSWindowToolbarStyle toolbarStyle,
+  }) async {
     await _completer.future;
     await _windowManipulatorMethodChannel.invokeMethod('setToolbarStyle', {
       'toolbarStyle': toolbarStyle.name,
@@ -513,8 +537,9 @@ class WindowManipulator {
   /// `makeWindowFullyTransparent()`.
   static Future<void> acknowledgeMouseEvents() async {
     await _completer.future;
-    await _windowManipulatorMethodChannel
-        .invokeMethod('acknowledgeMouseEvents');
+    await _windowManipulatorMethodChannel.invokeMethod(
+      'acknowledgeMouseEvents',
+    );
   }
 
   /// Sets the subtitle of the window.
@@ -628,14 +653,18 @@ class WindowManipulator {
   /// window's presentation to its default state.
   static Future<void> removeFullScreenPresentationOptions() async {
     await _completer.future;
-    final hasSucceeded = await _windowManipulatorMethodChannel
-        .invokeMethod('removeFullScreenPresentationOptions') as bool;
+    final hasSucceeded =
+        await _windowManipulatorMethodChannel.invokeMethod(
+              'removeFullScreenPresentationOptions',
+            )
+            as bool;
 
     assert(
-        hasSucceeded,
-        'removeFullScreenPresentationOptions failed. Please make sure that '
-        'the `enableWindowDelegate` parameter is set to true in your '
-        'WindowManipulator.initialize call.');
+      hasSucceeded,
+      'removeFullScreenPresentationOptions failed. Please make sure that '
+      'the `enableWindowDelegate` parameter is set to true in your '
+      'WindowManipulator.initialize call.',
+    );
   }
 
   /// Adds a [NSAppPresentationOption] to the window as a full-screen
@@ -680,17 +709,22 @@ class WindowManipulator {
   /// }).applyAsFullScreenPresentationOptions();
   /// ```
   static Future<void> addFullScreenPresentationOption(
-      NSAppPresentationOption option) async {
+    NSAppPresentationOption option,
+  ) async {
     await _completer.future;
-    final hasSucceeded = await _windowManipulatorMethodChannel.invokeMethod(
-        'addFullScreenPresentationOption',
-        {'presentationOption': option.name}) as bool;
+    final hasSucceeded =
+        await _windowManipulatorMethodChannel.invokeMethod(
+              'addFullScreenPresentationOption',
+              {'presentationOption': option.name},
+            )
+            as bool;
 
     assert(
-        hasSucceeded,
-        'addFullScreenPresentationOption failed. Please make sure that the '
-        '`enableWindowDelegate` parameter is set to true in your '
-        'WindowManipulator.initialize call.');
+      hasSucceeded,
+      'addFullScreenPresentationOption failed. Please make sure that the '
+      '`enableWindowDelegate` parameter is set to true in your '
+      'WindowManipulator.initialize call.',
+    );
   }
 
   /// Returns whether the window is the main window.
@@ -710,28 +744,33 @@ class WindowManipulator {
   ///       offset: const Offset(20, 20));
   /// // Moves close button 20 pixels to the right and down.
   /// ```
-  static Future<bool> overrideStandardWindowButtonPosition(
-      {required NSWindowButtonType buttonType, required Offset? offset}) async {
+  static Future<bool> overrideStandardWindowButtonPosition({
+    required NSWindowButtonType buttonType,
+    required Offset? offset,
+  }) async {
     await _completer.future;
-    return await _windowManipulatorMethodChannel
-        .invokeMethod('overrideStandardWindowButtonPosition', {
-      'buttonType': buttonType.name,
-      'offsetX': offset?.dx,
-      'offsetY': offset?.dy,
-    });
+    return await _windowManipulatorMethodChannel.invokeMethod(
+      'overrideStandardWindowButtonPosition',
+      {
+        'buttonType': buttonType.name,
+        'offsetX': offset?.dx,
+        'offsetY': offset?.dy,
+      },
+    );
   }
 
   /// Gets the position of the standard window button of type [buttonType].
   ///
   /// **Note:** The y position is measured as the distance from the bottom of
   /// the window’s title bar.
-  static Future<Rect> getStandardWindowButtonPosition(
-      {required NSWindowButtonType buttonType}) async {
+  static Future<Rect> getStandardWindowButtonPosition({
+    required NSWindowButtonType buttonType,
+  }) async {
     await _completer.future;
-    final map = await _windowManipulatorMethodChannel
-        .invokeMethod('getStandardWindowButtonPosition', {
-      'buttonType': buttonType.name,
-    });
+    final map = await _windowManipulatorMethodChannel.invokeMethod(
+      'getStandardWindowButtonPosition',
+      {'buttonType': buttonType.name},
+    );
 
     return Offset(map['x'], map['y']) & Size(map['width'], map['height']);
   }
@@ -756,8 +795,9 @@ class WindowManipulator {
   /// of the screen.
   static Future<Rect> getWindowFrame() async {
     await _completer.future;
-    final map =
-        await _windowManipulatorMethodChannel.invokeMethod('getWindowFrame');
+    final map = await _windowManipulatorMethodChannel.invokeMethod(
+      'getWindowFrame',
+    );
 
     return Offset(map['x'], map['y']) & Size(map['width'], map['height']);
   }
@@ -788,14 +828,16 @@ class WindowManipulator {
   /// [closeWindow].
   static Future<void> preventWindowClosure() async {
     await _completer.future;
-    final hasSucceeded = await _windowManipulatorMethodChannel
-        .invokeMethod('preventWindowClosure');
+    final hasSucceeded = await _windowManipulatorMethodChannel.invokeMethod(
+      'preventWindowClosure',
+    );
 
     assert(
-        hasSucceeded,
-        'preventWindowClosure failed. Please make sure that '
-        'the `enableWindowDelegate` parameter is set to true in your '
-        'WindowManipulator.initialize call.');
+      hasSucceeded,
+      'preventWindowClosure failed. Please make sure that '
+      'the `enableWindowDelegate` parameter is set to true in your '
+      'WindowManipulator.initialize call.',
+    );
   }
 
   /// Allows the window to be closed by the user.
@@ -803,21 +845,24 @@ class WindowManipulator {
   /// Requires the window delegate to be enabled.
   static Future<void> allowWindowClosure() async {
     await _completer.future;
-    final hasSucceeded = await _windowManipulatorMethodChannel
-        .invokeMethod('allowWindowClosure');
+    final hasSucceeded = await _windowManipulatorMethodChannel.invokeMethod(
+      'allowWindowClosure',
+    );
 
     assert(
-        hasSucceeded,
-        'allowWindowClosure failed. Please make sure that '
-        'the `enableWindowDelegate` parameter is set to true in your '
-        'WindowManipulator.initialize call.');
+      hasSucceeded,
+      'allowWindowClosure failed. Please make sure that '
+      'the `enableWindowDelegate` parameter is set to true in your '
+      'WindowManipulator.initialize call.',
+    );
   }
 
   /// Returns whether the window can be closed by the user.
   static Future<bool> isWindowClosureAllowed() async {
     await _completer.future;
-    return await _windowManipulatorMethodChannel
-        .invokeMethod('isWindowClosureAllowed');
+    return await _windowManipulatorMethodChannel.invokeMethod(
+      'isWindowClosureAllowed',
+    );
   }
 
   /// Removes the window from the screen.
@@ -860,17 +905,15 @@ class WindowManipulator {
     required bool enableDebugLayers,
   }) async {
     await _completer.future;
-    await _windowManipulatorMethodChannel.invokeMethod(
-      'updateToolbarPassthroughView',
-      {
-        'id': id,
-        'x': x,
-        'y': y,
-        'width': width,
-        'height': height,
-        'enableDebugLayers': enableDebugLayers,
-      },
-    );
+    await _windowManipulatorMethodChannel
+        .invokeMethod('updateToolbarPassthroughView', {
+          'id': id,
+          'x': x,
+          'y': y,
+          'width': width,
+          'height': height,
+          'enableDebugLayers': enableDebugLayers,
+        });
   }
 
   /// Removes the toolbar passthrough view with the specified [id].
@@ -878,9 +921,7 @@ class WindowManipulator {
     await _completer.future;
     await _windowManipulatorMethodChannel.invokeMethod(
       'removeToolbarPassthroughView',
-      {
-        'id': id,
-      },
+      {'id': id},
     );
   }
 }
